@@ -1,5 +1,5 @@
 using System.Web;
-using processService;
+using processManagement.Service;
 
 namespace processManagement
 {
@@ -11,9 +11,11 @@ namespace processManagement
             label2.Text = string.Empty;
             label2.AutoSize = false;
             label2.Width = 300;
+            label3.Text = "실행 할 프로그램을 종료하신 후 적용을 눌러주세요.";
         }
 
         string restartPath = string.Empty;
+        ProcessService ps;
 
         private void fileOpen_Click(object sender, EventArgs e)
         {
@@ -33,10 +35,12 @@ namespace processManagement
 
         private void applyButton_Click(object sender, EventArgs e)
         {
-            processServiceClass processServiceClass = new processServiceClass($"{label2}\\{comboBox1.SelectedItem}");
-
-            processServiceClass.Restart(restartCheck.Checked);
-            
+            ps = new ProcessService($"{label2.Text}\\{comboBox1.SelectedItem}", $"{comboBox1.SelectedItem}");
+            if (restartCheck.Checked)
+            {
+                Thread t = new Thread(() => ps.ReStartProcess());
+                t.IsBackground = true;
+            }
         }
     }
 }
