@@ -14,8 +14,10 @@ namespace processManagement
             label3.Text = "실행 할 프로그램을 종료하신 후 적용을 눌러주세요.";
         }
 
-        string restartPath = string.Empty;
-        ProcessService ps;
+        ProcessService ps = new ProcessService();
+        Thread t;
+
+
 
         private void fileOpen_Click(object sender, EventArgs e)
         {
@@ -30,17 +32,19 @@ namespace processManagement
                 string[] exeFiles = Directory.GetFiles(label2.Text, "*.exe");
                 comboBox1.Items.AddRange(exeFiles.Select(f => Path.GetFileName(f)).ToArray());
             }
-
         }
 
         private void applyButton_Click(object sender, EventArgs e)
         {
-            ps = new ProcessService($"{label2.Text}\\{comboBox1.SelectedItem}", $"{comboBox1.SelectedItem}");
-            if (restartCheck.Checked)
-            {
-                Thread t = new Thread(() => ps.ReStartProcess());
-                t.IsBackground = true;
-            }
+            ps.ProcessPath = $"{label2.Text}\\{comboBox1.SelectedItem}";
+            ps.ProcessName = Path.GetFileNameWithoutExtension($"{comboBox1.SelectedItem}");
+            t = new Thread(() => ps.ReStartProcess());
+            t.Start();
+        }
+
+        private void ButtonCheck(object sender, EventArgs e)
+        {
+            ps.ReStartCheck = restartCheck.Checked;
         }
     }
 }

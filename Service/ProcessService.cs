@@ -9,24 +9,22 @@ namespace processManagement.Service
 {
     internal class ProcessService
     {
-        public string ProcessPath;
-        public string ProcessName; 
+        public string ProcessPath = string.Empty;
+        public string ProcessName = string.Empty;
 
-        public ProcessService(string ProcessPath, string ProcessName)
-        {
-            this.ProcessPath = ProcessPath;
-            this.ProcessName = Path.GetFileNameWithoutExtension(ProcessName);
-        }
+        public bool ReStartCheck = false;
 
         public void ReStartProcess()
         {
-            Process[] p = Process.GetProcessesByName(ProcessName);
-            if (p == null)
-            {
-                Process.Start(ProcessName);
+            while (ReStartCheck)
+            { 
+                Process[] p = Process.GetProcessesByName(ProcessName);
+                if (p.Length == 0)
+                {
+                    Process.Start(ProcessPath);
+                }
+                Thread.Sleep(500); // 0.5초 대기
             }
-            
-
         }
     }
 }

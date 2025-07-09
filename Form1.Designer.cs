@@ -102,6 +102,7 @@
             restartCheck.TabIndex = 7;
             restartCheck.Text = "종료 시 재실행";
             restartCheck.UseVisualStyleBackColor = false;
+            restartCheck.CheckedChanged += ButtonCheck;
             // 
             // label3
             // 
