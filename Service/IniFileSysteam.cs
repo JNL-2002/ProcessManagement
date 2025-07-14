@@ -9,6 +9,8 @@ namespace processManagement.Service
 {
     internal class IniFileSysteam
     {
+        string FilePath = string.Empty;
+
         [DllImport("kernel32.dll")]
         private static extern uint GetPrivateProfileString(
             string section,
@@ -25,6 +27,21 @@ namespace processManagement.Service
             string value,
             string filePath);
 
+        public void CreateAndWriteIniFile(string FileName, string section, string Key, string Value)
+        {
+            FilePath = Path.Combine($"{Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName}\\Data", $"{FileName}.ini");
 
+            if (!File.Exists(FilePath))
+            {
+                using (File.Create(FilePath)) { }
+            }
+
+            WritePrivateProfileString(section, Key, Value, FilePath);
+        }
+
+        public string ReadlniFile ()
+        {
+        
+        }
     }
 }

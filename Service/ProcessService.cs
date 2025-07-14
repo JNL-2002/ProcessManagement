@@ -11,6 +11,8 @@ namespace processManagement.Service
     {
         public string ProcessPath = string.Empty;
         public string ProcessName = string.Empty;
+        IniFileSysteam ini = new IniFileSysteam();
+
 
         public bool ReStartCheck = false;
 
@@ -22,6 +24,7 @@ namespace processManagement.Service
                 if (p.Length == 0)
                 {
                     Process.Start(ProcessPath);
+                    ini.CreateAndWriteIniFile("Log", DateTime.Now.ToString(), "ReStartEvent", "발생");
                 }
                 Thread.Sleep(500); // 0.5초 대기
             }

@@ -1,3 +1,4 @@
+using System.Text;
 using System.Web;
 using processManagement.Service;
 
@@ -5,6 +6,8 @@ namespace processManagement
 {
     public partial class Form1 : Form
     {
+        StringBuilder sb = new StringBuilder(255);
+
         public Form1()
         {
             InitializeComponent();
@@ -15,8 +18,9 @@ namespace processManagement
         }
 
         ProcessService ps = new ProcessService();
+        IniFileSysteam ini = new IniFileSysteam();
         Thread t;
-
+        
 
 
         private void fileOpen_Click(object sender, EventArgs e)
@@ -40,6 +44,8 @@ namespace processManagement
             ps.ProcessName = Path.GetFileNameWithoutExtension($"{comboBox1.SelectedItem}");
             t = new Thread(() => ps.ReStartProcess());
             t.Start();
+
+            ini.CreateAndWriteIniFile("Setting", "ReStartButton", "ON/OFF", $"{restartCheck.Checked}");
         }
 
         private void ButtonCheck(object sender, EventArgs e)
