@@ -34,7 +34,8 @@
             comboBox1 = new ComboBox();
             applyButton = new Button();
             restartCheck = new CheckBox();
-            label3 = new Label();
+            listBox1 = new ListBox();
+            domainUpDown1 = new DomainUpDown();
             SuspendLayout();
             // 
             // fileOpen
@@ -104,22 +105,30 @@
             restartCheck.UseVisualStyleBackColor = false;
             restartCheck.CheckedChanged += ButtonCheck;
             // 
-            // label3
+            // listBox1
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("맑은 고딕", 12F);
-            label3.Location = new Point(200, 126);
-            label3.Name = "label3";
-            label3.Size = new Size(54, 21);
-            label3.TabIndex = 8;
-            label3.Text = "label3";
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(467, 284);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(208, 94);
+            listBox1.TabIndex = 8;
+            // 
+            // domainUpDown1
+            // 
+            domainUpDown1.Location = new Point(467, 255);
+            domainUpDown1.Name = "domainUpDown1";
+            domainUpDown1.Size = new Size(208, 23);
+            domainUpDown1.TabIndex = 9;
+            domainUpDown1.Text = "domainUpDown1";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(687, 390);
-            Controls.Add(label3);
+            Controls.Add(domainUpDown1);
+            Controls.Add(listBox1);
             Controls.Add(restartCheck);
             Controls.Add(applyButton);
             Controls.Add(comboBox1);
@@ -139,6 +148,7 @@
         private ComboBox comboBox1;
         private Button applyButton;
         private CheckBox restartCheck;
-        private Label label3;
+        private ListBox listBox1;
+        private DomainUpDown domainUpDown1;
     }
 }

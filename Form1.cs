@@ -1,3 +1,4 @@
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Web;
 using processManagement.Service;
@@ -6,25 +7,25 @@ namespace processManagement
 {
     public partial class Form1 : Form
     {
-        StringBuilder sb = new StringBuilder(255);
-
+        IniFileSysteam ini = new IniFileSysteam();
         public Form1()
         {
             InitializeComponent();
-            label2.Text = string.Empty;
+            label2.Text = ini.ReadlniFile("Setting", "Path").ToString();
+            comboBox1.Items.Add($"{ini.ReadlniFile("Setting", "ProcessName").ToString()}.exe");
+            comboBox1.SelectedIndex = 0;
             label2.AutoSize = false;
             label2.Width = 300;
-            label3.Text = "실행 할 프로그램을 종료하신 후 적용을 눌러주세요.";
         }
 
         ProcessService ps = new ProcessService();
-        IniFileSysteam ini = new IniFileSysteam();
         Thread t;
-        
 
 
         private void fileOpen_Click(object sender, EventArgs e)
         {
+            comboBox1.Items.Clear();
+
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
             {
                 folderDialog.RootFolder = Environment.SpecialFolder.MyComputer;
@@ -46,6 +47,8 @@ namespace processManagement
             t.Start();
 
             ini.CreateAndWriteIniFile("Setting", "ReStartButton", "ON/OFF", $"{restartCheck.Checked}");
+            ini.CreateAndWriteIniFile("Setting", "Path", "Path", $"{label2.Text}");
+            ini.CreateAndWriteIniFile("Setting", "ProcessName", "ProcessName", $"{ps.ProcessName}");
         }
 
         private void ButtonCheck(object sender, EventArgs e)

@@ -15,7 +15,7 @@ namespace processManagement.Service
         private static extern uint GetPrivateProfileString(
             string section,
             string key,
-            string defaultValue,
+            string defualt,
             StringBuilder value,
             uint size,
             string filePath);
@@ -39,9 +39,12 @@ namespace processManagement.Service
             WritePrivateProfileString(section, Key, Value, FilePath);
         }
 
-        public string ReadlniFile ()
+        public StringBuilder ReadlniFile(string FileName, string Section)
         {
-        
+            FilePath = Path.Combine($"{Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName}\\Data", $"{FileName}.ini");
+            StringBuilder sb = new StringBuilder(1500);
+            GetPrivateProfileString(Section, Section, string.Empty, sb, (uint)sb.Capacity, FilePath);
+            return sb;
         }
     }
 }
