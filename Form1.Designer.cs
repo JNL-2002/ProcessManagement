@@ -35,7 +35,7 @@
             applyButton = new Button();
             restartCheck = new CheckBox();
             listBox1 = new ListBox();
-            domainUpDown1 = new DomainUpDown();
+            comboBox2 = new ComboBox();
             SuspendLayout();
             // 
             // fileOpen
@@ -109,25 +109,27 @@
             // 
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(467, 284);
+            listBox1.Location = new Point(511, 91);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(208, 94);
+            listBox1.Size = new Size(164, 109);
             listBox1.TabIndex = 8;
             // 
-            // domainUpDown1
+            // comboBox2
             // 
-            domainUpDown1.Location = new Point(467, 255);
-            domainUpDown1.Name = "domainUpDown1";
-            domainUpDown1.Size = new Size(208, 23);
-            domainUpDown1.TabIndex = 9;
-            domainUpDown1.Text = "domainUpDown1";
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(511, 62);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(164, 23);
+            comboBox2.TabIndex = 9;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(687, 390);
-            Controls.Add(domainUpDown1);
+            Controls.Add(comboBox2);
             Controls.Add(listBox1);
             Controls.Add(restartCheck);
             Controls.Add(applyButton);
@@ -149,6 +151,6 @@
         private Button applyButton;
         private CheckBox restartCheck;
         private ListBox listBox1;
-        private DomainUpDown domainUpDown1;
+        private ComboBox comboBox2;
     }
 }
